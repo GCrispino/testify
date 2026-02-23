@@ -830,10 +830,15 @@ func (a *anythingImplementing) isImplementedBy(val interface{}) bool {
 	return t2.Implements(a.interfaceType)
 }
 
+// AnythingImplementing is just like AnythingOfType, but instead of checking against a concrete type, it is used to check if a value is of a type that implements a given interface
+//
+// For example, for checking if a value implements the context.Context interface:
+//
+//	var args = Arguments([]interface{}{AnythingImplementing((*context.Context)(nil))})
+//	args.Assert(t, AnythingImplementing(context.Background())
 func AnythingImplementing(val interface{}) anythingImplementing {
 	// Get the dynamic type
 	t := reflect.TypeOf(val)
-	fmt.Println("Type using reflect.TypeOf():", t)
 	interfaceType := t.Elem()
 
 	return anythingImplementing{interfaceType: interfaceType}

@@ -1999,6 +1999,7 @@ func Test_Arguments_Diff_WithAnythingImplementingArgument(t *testing.T) {
 	var count int
 	_, count = args.Diff([]interface{}{mockedService})
 
+	assert.True(t, args.Assert(t, mockedService))
 	assert.Equal(t, 0, count)
 }
 
@@ -2010,7 +2011,8 @@ func Test_Arguments_Diff_WithAnythingImplementingArgument_Failing(t *testing.T) 
 	})
 	var count int
 	var diff string
-	diff, count = args.Diff([]interface{}{123})
+	intVal := 123
+	diff, count = args.Diff([]interface{}{intVal})
 
 	assert.Equal(t, 1, count)
 	assert.Contains(t, diff, `value of type int does not implement interface mock.ExampleInterface`)
