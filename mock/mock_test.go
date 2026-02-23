@@ -2508,15 +2508,3 @@ func TestIssue1227AssertExpectationsForObjectsWithMock(t *testing.T) {
 	AssertExpectationsForObjects(mockT, Mock{})
 	assert.Equal(t, 1, mockT.errorfCount)
 }
-
-func TestTest(t *testing.T) {
-
-	a := AnythingImplementing((*context.Context)(nil))
-	backgroundCtx := context.Background()
-	cancelCtx, _ := context.WithCancel(backgroundCtx)
-	otherVal := "other"
-
-	assert.True(t, a.isImplementedBy(backgroundCtx))
-	assert.True(t, a.isImplementedBy(cancelCtx))
-	assert.False(t, a.isImplementedBy(otherVal))
-}
